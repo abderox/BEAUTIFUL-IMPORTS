@@ -5,7 +5,7 @@
     style="text-align: center;"
 >
     <img
-        src="github/logo-200x200-.png"
+        src="https://raw.githubusercontent.com/abderox/BEAUTIFUL-IMPORTS/main/icons/beautifulImports.png"
         alt="Beautiful imports"
     />
 </p>
@@ -32,7 +32,7 @@ This extension formats JavaScript imports to be more readable.
     style="text-align: center;"
 >
     <img
-        src="github/vscode-extension.gif"
+        src="https://github.com/abderox/BEAUTIFUL-IMPORTS/blob/main/github/vscode-extension.gif"
         alt="Inline imports"
     />
 </p>
@@ -75,6 +75,14 @@ import defaultExport, { export1, export2 } from 'module/path';
 import { export1 as alias1, export2 as alias2 } from 'module/path';
 //are not included yet
 ```
+
+## How to install it 💻
+
+- Open VS Code.
+- Press `Ctrl+Shift+P` (Windows, Linux) or `Cmd+Shift+P` (macOS) to open the command palette.
+- Type Extensions: `Install from VSIX` in the command palette and select it.
+- Navigate to the location of the `.vsix` file on your computer and select it.
+- VS Code will install the extension and prompt you to restart the editor. If you have any unsaved work, be sure to save it before restarting.
 
 ## Requirements
 
