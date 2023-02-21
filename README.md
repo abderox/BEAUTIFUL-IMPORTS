@@ -68,6 +68,7 @@ const {
 ## Unreleased
 
 - Removes unused imports and sorts the remaining imports alphabetically.
+- Formating imports on save.
   
 ```typescript
 //this
