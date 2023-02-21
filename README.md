@@ -32,7 +32,7 @@ This extension formats JavaScript imports to be more readable.
     style="text-align: center;"
 >
     <img
-        src="https://github.com/abderox/BEAUTIFUL-IMPORTS/blob/main/github/vscode-extension.gif"
+        src="github/vscode-extension.gif"
         alt="Inline imports"
     />
 </p>
@@ -78,11 +78,14 @@ import { export1 as alias1, export2 as alias2 } from 'module/path';
 
 ## How to install it 💻
 
+- Go to [Release](https://github.com/abderox/BEAUTIFUL-IMPORTS/releases/tag/v1.0.0)
+- Download `beautifulimports-1.0.0.vsix`
 - Open VS Code.
 - Press `Ctrl+Shift+P` (Windows, Linux) or `Cmd+Shift+P` (macOS) to open the command palette.
 - Type Extensions: `Install from VSIX` in the command palette and select it.
 - Navigate to the location of the `.vsix` file on your computer and select it.
-- VS Code will install the extension and prompt you to restart the editor. If you have any unsaved work, be sure to save it before restarting.
+- VS Code will install the extension and prompt you to restart the editor.
+- If you have any unsaved work, be sure to save it before restarting.
 
 ## Requirements
 
