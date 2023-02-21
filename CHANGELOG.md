@@ -8,6 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Removes unused imports and sorts the remaining imports alphabetically
 - Formating exports and sorts the remaining imports alphabetically
+- Formating imports on save
 
 ```typescript
 //this

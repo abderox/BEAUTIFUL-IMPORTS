@@ -7,6 +7,10 @@
   "engines": {
     "vscode": "^1.75.0"
   },
+  "publisher": "abderox",
+  "activationEvents": [
+    "onCommand:extension.formatImports"
+  ],
   "categories": [
     "Other"
   ],
