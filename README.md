@@ -9,7 +9,7 @@ This is the README for your extension "Beautiful imports"
     <img
         src="./icons/beautifulImports.png"
         alt="Beautiful imports"
-        width="128"
+        width="200"
     />
 </p>
 
