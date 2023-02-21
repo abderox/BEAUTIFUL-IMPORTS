@@ -3,7 +3,7 @@
   "displayName": "Beautiful Imports",
   "description": "This extension is designed to improve the readability of JavaScript files by formatting imports. In particular, it formats inline imports with more than three elements to be displayed vertically, making it easier to read and understand the imports in your code.",
   "version": "1.0.0",
-  "icon": "./icons/beautifulImports.png",
+  "icon": "https://raw.githubusercontent.com/abderox/BEAUTIFUL-IMPORTS/main/icons/beautifulImports.png",
   "engines": {
     "vscode": "^1.75.0"
   },
