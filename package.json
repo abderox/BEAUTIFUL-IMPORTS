@@ -1,0 +1,70 @@
+{
+  "name": "beautifulimports",
+  "displayName": "Beautiful Imports",
+  "description": "This extension is designed to improve the readability of JavaScript files by formatting imports. In particular, it formats inline imports with more than three elements to be displayed vertically, making it easier to read and understand the imports in your code.",
+  "version": "1.0.0",
+  "icon" : "./icons/beautifulImports.png",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/format.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Beautiful Imports",
+      "properties": {
+        "beautifulImports.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Toggle this setting to enable/disable Beautiful Imports."
+        },
+        "beautifulImports.maxInlineImports": {
+          "type": "number",
+          "default": 3,
+          "description": "The maximum number of imports that can be displayed on a single line. If the number of imports exceeds this value, they will be displayed vertically."
+        }
+      }
+    },
+    "commands": [{
+      "command": "extension.formatImports",
+      "title": "Format imports",
+      "category": "Document Format"
+    }],
+    "keybindings": [
+      {
+        "command": "extension.formatImports",
+        "key": "ctrl+shift+j",
+        "mac": "cmd+shift+j",
+        "when": "config.beautifulImports.enabled && editorTextFocus && (resourceExtname == '.myExtension' || resourceExtname == '.js' || resourceExtname == '.ts' || resourceExtname == '.jsx' || resourceExtname == '.tsx')"
+      }
+    ],
+    "menus": {
+      "editor/context": [{
+        "command": "extension.formatImports",
+        "group": "navigation",
+        "when": "config.beautifulImports.enabled && editorTextFocus && (resourceExtname == '.myExtension' || resourceExtname == '.js' || resourceExtname == '.ts' || resourceExtname == '.jsx' || resourceExtname == '.tsx')"
+      }
+  
+    ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/glob": "^8.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "eslint": "^8.33.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.4",
+    "@vscode/test-electron": "^2.2.2"
+  }
+}
