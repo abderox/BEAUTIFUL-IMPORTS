@@ -7,9 +7,8 @@ This is the README for your extension "Beautiful imports"
     style="text-align: center;"
 >
     <img
-        src="./icons/beautifulImports.png"
+        src="./github/logo-200x200-.png"
         alt="Beautiful imports"
-        width="200"
     />
 </p>
 
