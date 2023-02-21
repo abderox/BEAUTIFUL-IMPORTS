@@ -64,7 +64,6 @@ const {
   method8
 } = require("package");
 ```
-```
 
 ## Unreleased
 
