@@ -5,7 +5,7 @@
     style="text-align: center;"
 >
     <img
-        src="./github/logo-200x200-.png"
+        src="https://github.com/abderox/BEAUTIFUL-IMPORTS/blob/main/github/logo-200x200-.png"
         alt="Beautiful imports"
     />
 </p>
@@ -32,7 +32,7 @@ This extension formats JavaScript imports to be more readable.
     style="text-align: center;"
 >
     <img
-        src="./github/vscode-extension.gif"
+        src="https://github.com/abderox/BEAUTIFUL-IMPORTS/blob/main/github/vscode-extension.gif"
         alt="Inline imports"
     />
 </p>
