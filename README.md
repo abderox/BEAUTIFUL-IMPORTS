@@ -43,6 +43,8 @@ This extension formats JavaScript imports to be more readable.
 
 ```typescript
 import {bmethod5 , cmethod6 ,amethod7, method8} from "package";
+
+const {bmethod5 , cmethod6 ,amethod7, method8} =require ("package");
 ```
 
 - _To this_
@@ -54,6 +56,14 @@ import {
   cmethod7,
   method8
 } from "package";
+
+const {
+  amethod5,
+  bmethod6,
+  cmethod7,
+  method8
+} = require("package");
+```
 ```
 
 ## Unreleased
