@@ -1,7 +1,5 @@
 # Beautiful imports README
 
-This is the README for your extension "Beautiful imports"
-
 <p
     align="center"
     style="text-align: center;"
