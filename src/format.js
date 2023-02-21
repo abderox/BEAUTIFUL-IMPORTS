@@ -7,7 +7,7 @@ const {
 } = require('./utils');
 
 const isEnabled = vscode.workspace.getConfiguration("beautifulImports").get("enabled");
-
+let documentListener;
 
 function formatImports() {
 
@@ -15,7 +15,7 @@ function formatImports() {
         vscode.window.showErrorMessage(`beautifulImports Extension is disabled`);
         return;
     }
-    
+
 
     const editor = vscode.window.activeTextEditor;
     const document = editor.document;
@@ -30,6 +30,8 @@ function formatImports() {
         }
 
     }
+
+   
 
 
     if (document.lineCount === 0) {
@@ -86,23 +88,27 @@ function formatImports() {
 
 function activate(context) {
 
-    const disposable = vscode.commands.registerCommand('extension.formatImports', ()=>{
-        vscode.workspace.onDidChangeTextDocument((event) => {
-
-            if (event.contentChanges[0].rangeLength > 0 && event.contentChanges[0].text === "") {
-                console.log("Error is thrown  here")
-                return;
-              }
-            formatImports();
-            
-        });
-    });
+    vscode.workspace.onDidChangeTextDocument((event) => {
+        // Check if the event is an undo event
+        if (event.contentChanges[0].rangeLength > 0 && event.contentChanges[0].text === "") {
+          console.log("Undo detected. Not formatting imports.");
+          return;
+        }
+        
+    
+      });
+    const disposable = vscode.commands.registerCommand('extension.formatImports', formatImports);
+    
     context.subscriptions.push(disposable);
+   
+
 }
 
 
 function deactivate() {
     vscode.window.showErrorMessage(`beautifulImports Extension Deactivated`);
+    context.subscriptions.map(e => e.dispose())
+
 }
 
 module.exports = {

@@ -51,17 +51,7 @@ function processElements(maxElementsPerLine, elements) {
     for (let i = 0; i < elementArray.length; i += maxElementsPerLine) {
         let lineElements = elementArray.slice(i, i + maxElementsPerLine);
         lineElements.sort();
-
-        const formattedElements = lineElements.map((element) => {
-            if (element.includes(':')) {
-                const [name, type] = element.split(':').map((e) => e.trim());
-                return `${name}: ${type}`;
-            }
-
-            return element;
-        });
-
-        lines.push(`  ${formattedElements.join(',\n  ')}`);
+        lines.push(`  ${lineElements.join(',\n  ')}`);
     }
 
     return lines;

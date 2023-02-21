@@ -12,6 +12,10 @@ This is the README for your extension "Beautiful imports"
     />
 </p>
 
+## DISCLAIMER
+
+👋 Please pardon me, as this is my first time creating an extension for Visual Studio Code. I have limited knowledge and expertise, so I appreciate your patience.
+
 ## Overview
 
 This extension formats JavaScript imports to be more readable.
@@ -20,10 +24,49 @@ This extension formats JavaScript imports to be more readable.
 
 - The Beautiful imports extension is designed to improve the readability of JavaScript files by formatting imports.
 - In particular, it formats inline imports with more than `3 (default value)` elements to be displayed vertically, making it easier to read and understand the imports in your code.
+- Automatic sorting.
+- Supports both import and require statements.
 
-For example if there is an image subfolder under your extension project workspace:
+## Usage
 
-\!\[feature X\]\(images/feature-x.png\)
+<p
+    align="center"
+    style="text-align: center;"
+>
+    <img
+        src="./github/vscode-extension.gif"
+        alt="Inline imports"
+    />
+</p>
+
+- _From this_
+
+```typescript
+import {bmethod5 , cmethod6 ,amethod7, method8} from "package";
+```
+
+- _To this_
+
+```typescript
+import {
+  amethod5,
+  bmethod6,
+  cmethod7,
+  method8
+} from "package";
+```
+
+## Unreleased
+
+- Removes unused imports and sorts the remaining imports alphabetically.
+  
+```typescript
+//this
+import defaultExport, { export1, export2 } from 'module/path';
+//and this
+import { export1 as alias1, export2 as alias2 } from 'module/path';
+//are not included yet
+```
 
 ## Requirements
 
@@ -45,7 +88,9 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-This is  just a prototype, it will be replaced sooner.
+- ⚠️ This is  just a prototype, it will be replaced or removed sooner.
+- In rare cases, formatting may not work correctly if the import statements are not formatted correctly in the first place.
+- `Error: Illegal value for 'line'` may be thrown for some reason.
 
 ## Release Notes
 
