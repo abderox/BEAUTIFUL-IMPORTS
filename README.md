@@ -32,7 +32,7 @@ This extension formats JavaScript imports to be more readable.
     style="text-align: center;"
 >
     <img
-        src="github/vscode-extension.gif"
+        src="https://raw.githubusercontent.com/abderox/BEAUTIFUL-IMPORTS/main/github/vscode-extension.gif"
         alt="Inline imports"
     />
 </p>
@@ -40,9 +40,13 @@ This extension formats JavaScript imports to be more readable.
 - _From this_
 
 ```typescript
-import {bmethod5 , cmethod6 ,amethod7, method8} from "package";
+import {bmethod5 , cmethod6 ,amethod7, method8} from "package"
 
-const {bmethod5 , cmethod6 ,amethod7, method8} =require ("package");
+const {bmethod5 , cmethod6 ,amethod7, method8} =require ("package")
+
+import defaultExport, { a as a1 ,b as b1, c as c1 } from "module/path"
+
+export let Amodule = { method1: methodA, method2: methodB, method3: methodC};
 ```
 
 - _To this_
@@ -61,22 +65,47 @@ const {
   cmethod7,
   method8
 } = require("package");
+
+import defaultExport, {
+  a as a1,
+  b as b1,
+  c as c1
+} from "module/path";
+
+export let Amodule = {
+  method1: methodA,
+  method2: methodB,
+  method3: methodC
+};
 ```
 
 ## Unreleased
 
-- Removes unused imports and sorts the remaining imports alphabetically.
+- Removes unused imports.
+- Formating React components props
 - Formating imports on save.
-  
-```typescript
-//this
-import defaultExport, { export1, export2 } from 'module/path';
-//and this
-import { export1 as alias1, export2 as alias2 } from 'module/path';
-//are not included yet
+
+## Release Notes
+
+### 1.0.0
+
+Initial release of Beautiful imports extension.
+
+### 1.0.1
+
+```diff
++ It is able now to format exports both for `commonJS` & `moduleJS`;
++ It is able now to format import (as a list) with its different known ways as follows 
 ```
 
-## How to install it 💻
+```typescript
+import {a, b, c} from 'module/path'
+import {a as a1, b as b1, c as c1} from 'module/path'
+import defaultExport, {a, b, c} from 'module/path'
+import defaultExport, {a as a1, b as b1, c as c1} from 'module/path'
+```
+  
+## How to install it locally Without getting to market place💻
 
 - Go to [Release](https://github.com/abderox/BEAUTIFUL-IMPORTS/releases/tag/v1.0.0)
 - Download `beautifulimports-1.0.0.vsix`
@@ -110,11 +139,5 @@ This extension contributes the following settings:
 - ⚠️ This is  just a prototype, it will be replaced or removed sooner.
 - In rare cases, formatting may not work correctly if the import statements are not formatted correctly in the first place.
 - `Error: Illegal value for 'line'` may be thrown for some reason.
-
-## Release Notes
-
-### 1.0.0
-
-Initial release of Beautiful imports extension.
 
 **Enjoy!** 😄

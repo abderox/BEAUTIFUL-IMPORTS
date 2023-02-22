@@ -7,7 +7,7 @@ const {
 } = require('./utils');
 
 const isEnabled = vscode.workspace.getConfiguration("beautifulImports").get("enabled");
-let documentListener;
+
 
 function formatImports() {
 
@@ -16,12 +16,13 @@ function formatImports() {
         return;
     }
 
-
     const editor = vscode.window.activeTextEditor;
     const document = editor.document;
+
     let imports = [];
     let requires = [];
-
+    let exports_ = [];
+    let mexports = [];
 
     if (editor) {
         if (!supportedFileType()) {
@@ -31,9 +32,6 @@ function formatImports() {
 
     }
 
-   
-
-
     if (document.lineCount === 0) {
         vscode.window.showWarningMessage(`This file is empty`);
         return;
@@ -41,23 +39,28 @@ function formatImports() {
 
     for (let i = 0; i < document.lineCount; i++) {
         try {
-            console.log("Debugging here 1")
+
             const line = document.lineAt(i);
-            console.log("Debugging here 2")
 
             if (!line) {
                 continue;
             }
-            console.log("Debugging here 3")
 
-            const { importStatement, requireStatement } = pushToArray(line);
+            const { import_, export_, moduleExport, require_ } = pushToArray(line);
 
-            if (importStatement != null) {
-                imports.push(importStatement);
+            if (import_ != null) {
+                imports.push(import_);
             }
-            if (requireStatement != null) {
-                requires.push(requireStatement);
+            if (require_ != null) {
+                requires.push(require_);
             }
+            if (export_ != null) {
+                exports_.push(export_);
+            }
+            if (moduleExport != null) {
+                mexports.push(moduleExport);
+            }
+
         } catch (error) {
             console.error(`Error on line ${i}: ${error}`);
             vscode.window.showErrorMessage(`Error on line ${i}:  ${error}`);
@@ -66,14 +69,12 @@ function formatImports() {
 
     }
 
-    let changes = processLines(imports, requires);
+    let changes = processLines(imports, requires, exports_, mexports);
 
     if (Array.isArray(changes) && changes.length != 0) {
         const edit = new vscode.WorkspaceEdit();
         edit.set(document.uri, changes);
         changes = []
-        imports = []
-        requires = []
         vscode.workspace.applyEdit((edit)).then(
             (success) => {
                 if (success) {
@@ -91,16 +92,16 @@ function activate(context) {
     vscode.workspace.onDidChangeTextDocument((event) => {
         // Check if the event is an undo event
         if (event.contentChanges[0].rangeLength > 0 && event.contentChanges[0].text === "") {
-          console.log("Undo detected. Not formatting imports.");
-          return;
+            console.log("Undo detected. Not formatting imports.");
+            return;
         }
-        
-    
-      });
+
+
+    });
     const disposable = vscode.commands.registerCommand('extension.formatImports', formatImports);
-    
+
     context.subscriptions.push(disposable);
-   
+
 
 }
 
