@@ -17,7 +17,7 @@
     "onCommand:extension.formatImports"
   ],
   "categories": [
-    "Other"
+    "Formatters"
   ],
   "main": "./src/format.js",   
   "contributes": {
@@ -41,7 +41,7 @@
       {
         "command": "extension.formatImports",
         "title": "Format imports",
-        "category": "Document Format"
+        "category": "Format Document"
       }
     ],
     "keybindings": [
