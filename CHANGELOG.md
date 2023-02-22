@@ -10,22 +10,23 @@
 ### [1.0.3] - 2022-02-22
 
 - Now it can formats React Componenets' attributes and props with more or equal to `3`
-- You better format your document using the famous shortcut `Alt+Shift+F` before using this extesnion.
+- It is recommended to format your document using the widely-known shortcut `Alt+Shift+F` before utilizing this extension `ctrl+Shift+J`.
 
 _It transforms this_
 
 ```typescript
-< Component disabled className = 'heheh' value1={val} value2={val2} value3=50  />
+< Component disabled className = 'class' value1={val} value2={val2} value3=50 disabled  />
 ```
 
 _To this_
 
 ```typescript
 <Component
-              className='heheh'
+              className='class'
               value1={val}
               value2={val2}
               value3=50
+              disabled
 />
 ```
 
@@ -57,11 +58,10 @@ Features
 ## Feautures
 
 - The Beautiful imports extension is designed to improve the readability of JavaScript files by formatting imports.
-- Supports automatic sorting.
+- In particular, it formats inline imports with more than `3 (default value)` elements to be displayed vertically, making it easier to read and understand the imports in your code.
+- Automatic sorting for imports and exports.
 - Supports both import and require statements.
-- Supports both Javascript and Typescript imports.
-- Formats format exports both for commonJS & moduleJS.
-- Formats React Componenets' attributes
+- Formats html tags ,React Componenets' attributes with more or equal to `3 (default value)` elements to be displayed vertically.
 
 ## Known Issues
 

@@ -1,4 +1,4 @@
-# Beautiful imports README
+# Beautiful imports
 
 <p
     align="center"
@@ -13,19 +13,20 @@
 ## DISCLAIMER
 
 - 👋 Please pardon me, as this is my first time creating an extension for Visual Studio Code. I have limited knowledge and expertise, so I appreciate your patience.
-- It is recommended to format your document using the widely-known shortcut `Alt+Shift+F` before utilizing this extension `ctrl+Shift+J`.
+- 🔔 It is recommended to format your document using the widely-known shortcut `Alt+Shift+F` before utilizing this extension `ctrl+Shift+J`.
 
 ## Overview
 
-This extension formats JavaScript imports to be more readable.
+- This extension is designed to format JavaScript elements that may not be formatted by other formatters.
+- Although it was initially intended to format imports, it has expanded its capabilities.
 
 ## Features
 
 - The Beautiful imports extension is designed to improve the readability of JavaScript files by formatting imports.
 - In particular, it formats inline imports with more than `3 (default value)` elements to be displayed vertically, making it easier to read and understand the imports in your code.
-- Automatic sorting.
+- Automatic sorting for imports and exports.
 - Supports both import and require statements.
-- Formats React Componenets' attributes with more or equal to `3 (default value)` elements to be displayed vertically.
+- Formats html tags ,React Componenets' attributes with more or equal to `3 (default value)` elements to be displayed vertically.
 
 ## Usage
 
@@ -91,6 +92,23 @@ export let Amodule = {
 ### 1.0.3
 
 - Now it can formats React Componenets' attributes and props with more or equal to `3`
+_It transforms this_
+
+```typescript
+< Component disabled className = 'class' value1={val} value2={val2} value3=50 disabled  />
+```
+
+_To this_
+
+```typescript
+<Component
+              className='class'
+              value1={val}
+              value2={val2}
+              value3=50
+              disabled
+/>
+```
 
 ### 1.0.2
 
