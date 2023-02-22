@@ -2,7 +2,7 @@
   "name": "beautifulimports",
   "displayName": "Beautiful Imports",
   "description": "This extension is designed to improve the readability of JavaScript files by formatting imports. In particular, it formats inline imports with more than three elements to be displayed vertically, making it easier to read and understand the imports in your code.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "icon": "icons/beautifulImports.png",
   "license": "MIT",
   "repository": {
@@ -34,13 +34,19 @@
           "type": "number",
           "default": 3,
           "description": "The maximum number of imports that can be displayed on a single line. If the number of imports exceeds this value, they will be displayed vertically."
+        },
+        "beautifulImports.IndentsMaxNumber" : {
+          "type": "number",
+          "default": 14,
+          "description": "This number defines how many white spaces to put counting from the end of the tag name. The default value is 14."
         }
+
       }
     },
     "commands": [
       {
         "command": "extension.formatImports",
-        "title": "Format imports",
+        "title": "Format Elements",
         "category": "Format Document"
       }
     ],

@@ -23,6 +23,7 @@ function formatImports() {
     let requires = [];
     let exports_ = [];
     let mexports = [];
+    let tags = [];
 
     if (editor) {
         if (!supportedFileType()) {
@@ -46,7 +47,7 @@ function formatImports() {
                 continue;
             }
 
-            const { import_, export_, moduleExport, require_ } = pushToArray(line);
+            const { import_, export_, moduleExport, require_, tag } = pushToArray(line);
 
             if (import_ != null) {
                 imports.push(import_);
@@ -60,6 +61,10 @@ function formatImports() {
             if (moduleExport != null) {
                 mexports.push(moduleExport);
             }
+            if (tag != null) {
+                tags.push(tag);
+            }
+
 
         } catch (error) {
             console.error(`Error on line ${i}: ${error}`);
@@ -69,21 +74,31 @@ function formatImports() {
 
     }
 
-    let changes = processLines(imports, requires, exports_, mexports);
+    let changes = processLines(imports, requires, exports_, mexports, tags);
 
     if (Array.isArray(changes) && changes.length != 0) {
         const edit = new vscode.WorkspaceEdit();
         edit.set(document.uri, changes);
         changes = []
-        vscode.workspace.applyEdit((edit)).then(
-            (success) => {
-                if (success) {
-                    vscode.window.showInformationMessage(`Imports sorted successfully!`);
-                } else {
-                    vscode.window.showErrorMessage(`beautifulImports Extension Failed`);
-                }
+        vscode.window.withProgress({
+            location: vscode.ProgressLocation.Notification,
+            title: 'Formating elements',
+            cancellable: false
+        }, (progress, token) => {
+            token.onCancellationRequested(() => {
+                console.log("User canceled the long running operation");
+            });
+
+            progress.report({ message: "Please wait, formatting may take a while..." });
+
+            return vscode.workspace.applyEdit(edit);
+        }).then((success) => {
+            if (success) {
+                vscode.window.showInformationMessage(`Elements are now Beautiful!`);
+            } else {
+                vscode.window.showErrorMessage(`beautifulImports Extension Failed`);
             }
-        )
+        });
     }
 }
 

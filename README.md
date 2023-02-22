@@ -12,7 +12,8 @@
 
 ## DISCLAIMER
 
-👋 Please pardon me, as this is my first time creating an extension for Visual Studio Code. I have limited knowledge and expertise, so I appreciate your patience.
+- 👋 Please pardon me, as this is my first time creating an extension for Visual Studio Code. I have limited knowledge and expertise, so I appreciate your patience.
+- It is recommended to format your document using the widely-known shortcut `Alt+Shift+F` before utilizing this extension `ctrl+Shift+J`.
 
 ## Overview
 
@@ -24,6 +25,7 @@ This extension formats JavaScript imports to be more readable.
 - In particular, it formats inline imports with more than `3 (default value)` elements to be displayed vertically, making it easier to read and understand the imports in your code.
 - Automatic sorting.
 - Supports both import and require statements.
+- Formats React Componenets' attributes with more or equal to `3 (default value)` elements to be displayed vertically.
 
 ## Usage
 
@@ -32,7 +34,7 @@ This extension formats JavaScript imports to be more readable.
     style="text-align: center;"
 >
     <img
-        src="https://raw.githubusercontent.com/abderox/BEAUTIFUL-IMPORTS/main/github/vscode-extension.gif"
+        src="https://raw.githubusercontent.com/abderox/BEAUTIFUL-IMPORTS/main/github/extension-v1.0.3.gif"
         alt="Inline imports"
     />
 </p>
@@ -82,14 +84,17 @@ export let Amodule = {
 ## Unreleased
 
 - Removes unused imports.
-- Formating React components props
 - Formating imports on save.
 
 ## Release Notes
 
-### 1.0.0
+### 1.0.3
 
-Initial release of Beautiful imports extension.
+- Now it can formats React Componenets' attributes and props with more or equal to `3`
+
+### 1.0.2
+
+- No changes within the extension
 
 ### 1.0.1
 
@@ -104,7 +109,11 @@ import {a as a1, b as b1, c as c1} from 'module/path'
 import defaultExport, {a, b, c} from 'module/path'
 import defaultExport, {a as a1, b as b1, c as c1} from 'module/path'
 ```
-  
+
+### 1.0.0
+
+Initial release of Beautiful imports extension.
+
 ## How to install it locally Without getting to market place💻
 
 - Go to [Release](https://github.com/abderox/BEAUTIFUL-IMPORTS/releases/tag/v1.0.1)
@@ -133,6 +142,9 @@ This extension contributes the following settings:
 - `beautifulImports.enable`: Enable/disable this extension.
 
 - `beautifulImports.maxInlineImports`: The number of inline imports allowed before they are formatted vertically. Default is 3.
+
+- `beautifulImports.IndentsMaxNumber` : This number defines how many white spaces to put counting from the end of tagName . Deafault is 14.
+
 
 ## Known Issues
 

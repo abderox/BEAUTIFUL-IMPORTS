@@ -1,7 +1,14 @@
 const vscode = require('vscode');
 const path = require('path');
 
-const { IMPORT_STATEMENT_REGEX, REQUIRE_STATEMENT_REGEX, SUPPORTED_FILE_TYPES, EXPORT_STATEMENT_REGEX, MODULE_EXPORT_REGEX } = require('./constants');
+const {
+    IMPORT_STATEMENT_REGEX,
+    REQUIRE_STATEMENT_REGEX,
+    EXPORT_STATEMENT_REGEX,
+    MODULE_EXPORT_REGEX,
+    TAG_REGEX,
+    TAG_ATTRIBUTES,
+    SUPPORTED_FILE_TYPES, } = require('./constants');
 
 function supportedFileType() {
     const filePath = vscode.workspace.textDocuments[0].uri.fsPath;
@@ -11,19 +18,18 @@ function supportedFileType() {
 
 function breakIntoElements(lineText, line) {
 
-    const importStatement = lineText.match(IMPORT_STATEMENT_REGEX);
-    const requireStatement = lineText.match(REQUIRE_STATEMENT_REGEX);
-    const exportStatement = lineText.match(EXPORT_STATEMENT_REGEX);
-    const moduleExportStatement = lineText.match(MODULE_EXPORT_REGEX);
+    const importStatement = lineText.trim().match(IMPORT_STATEMENT_REGEX);
+    const requireStatement = lineText.trim().match(REQUIRE_STATEMENT_REGEX);
+    const exportStatement = lineText.trim().match(EXPORT_STATEMENT_REGEX);
+    const moduleExportStatement = lineText.trim().match(MODULE_EXPORT_REGEX);
+    const tagStatement = lineText.match(TAG_REGEX);
+    console.log("🚀 ~ file: index.js:26 ~ breakIntoElements ~ tagStatement:", tagStatement)
+    
 
 
     if (importStatement) {
-        console.log("🚀 ~ file: index.js:21 ~ breakIntoElements ~ importStatement:", importStatement)
-
         const [_, __, default_, elements] = importStatement;
         console.log("🚀 ~ file: index.js:23 ~ breakIntoElements ~ default_:", default_)
-
-
         return {
             type: 'import_',
             elements: { line, default_, elements, packageName: importStatement[importStatement.length - 1] }
@@ -46,6 +52,12 @@ function breakIntoElements(lineText, line) {
             type: 'moduleExport',
             elements: { line, elements, packageName: moduleExportStatement[moduleExportStatement.length - 1] }
         }
+    } else if (tagStatement) {
+        const [, sapce, tagName, attributes, closingTag] = tagStatement;
+        return {
+            type: 'tag',
+            elements: { line, indent: " ".repeat(sapce.split(" ").length - 1), tagName, attributes, closingTag }
+        }
     } else {
         return {
             type: null,
@@ -61,23 +73,52 @@ function pushToArray(line) {
         import_: null,
         require_: null,
         export_: null,
-        moduleExport: null
+        moduleExport: null,
+        tag: null
     };
 
     if (!line) {
         return statements;
     }
 
-    let trimmedLine = line.text || line.b;
-    trimmedLine = trimmedLine.trim();
+    let lineText = line.text || line.b;
 
-    const { type, elements } = breakIntoElements(trimmedLine, line);
+    const { type, elements } = breakIntoElements(lineText, line);
 
     if (statements.hasOwnProperty(type)) {
         statements[type] = elements;
     }
 
     return statements;
+
+}
+
+
+function processTagElements(maxElementsPerLine, elements , spaces) {
+    let [, ...attributes] = elements.match(TAG_ATTRIBUTES);
+    attributes = attributes.map(e => e.trim());
+    console.log("🚀 ~ file: index.js:99 ~ processTagElements ~ attributes:", attributes)
+    const indetsMaxNumber = vscode.workspace.getConfiguration('beautifulImports').get('IndentsMaxNumber') || 14;
+
+    let lines = []
+    const indent = " ".repeat(indetsMaxNumber) + spaces;
+
+    for (let i = 0; i < attributes.length; i += maxElementsPerLine) {
+        let lineElements = attributes.slice(i, i + maxElementsPerLine);
+        let formatedLines = lineElements.map(e => {
+            if (e.includes('=')) {
+                const [key, value] = e.split('=').map(it => it.trim());
+                return `${indent}${key}=${value}`;
+            }
+            else {
+                return `${indent}${e}`;
+            }
+
+        })
+
+        lines.push(`${formatedLines.join('\n')}`);
+    }
+    return lines;
 
 }
 
@@ -110,7 +151,7 @@ function processElements(maxElementsPerLine, elements) {
 }
 
 
-function processLines(imports = [], requires = [], exports = [], mexports = []) {
+function processLines(imports = [], requires = [], exports = [], mexports = [], tags = []) {
     const maxElementsPerLine = parseInt(vscode.workspace.getConfiguration("beautifulImports").get("maxInlineImports"));
     let changes = []
 
@@ -157,6 +198,16 @@ function processLines(imports = [], requires = [], exports = [], mexports = []) 
             let lines = processElements(maxElementsPerLine, elements);
             // Replace the module export statement line with the reformatted lines
             const newText = `module.exports = {\n${lines.join(',\n')}\n};\n`;
+            changes.push(new vscode.TextEdit(line.range, newText));
+        }
+    }
+
+    if (tags.length > 0) {
+        for (const tagStatement of tags) {
+            const { line, indent, tagName, attributes, closingTag } = tagStatement;
+            let lines = processTagElements(maxElementsPerLine, attributes , indent);
+            // Replace the tag statement line with the reformatted lines
+            const newText = `${indent}<${tagName.trim()}\n${lines.join('\n')}\n${closingTag ? indent+closingTag.trim() : indent+'>'}\n`;
             changes.push(new vscode.TextEdit(line.range, newText));
         }
     }
