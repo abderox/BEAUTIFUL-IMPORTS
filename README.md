@@ -134,8 +134,8 @@ Initial release of Beautiful imports extension.
 
 ## How to install it locally Without getting to market place💻
 
-- Go to [Release](https://github.com/abderox/BEAUTIFUL-IMPORTS/releases/tag/v1.0.1)
-- Download `beautifulimports-1.0.1.vsix` or download it directly from [Download](https://github.com/abderox/BEAUTIFUL-IMPORTS/releases/download/v1.0.1/beautifulimports-1.0.1.vsix)
+- Go to [Release](https://github.com/abderox/BEAUTIFUL-IMPORTS/releases)
+- Download the release you want `.vsix`
 - Open VS Code.
 - Press `Ctrl+Shift+P` (Windows, Linux) or `Cmd+Shift+P` (macOS) to open the command palette.
 - Type Extensions: `Install from VSIX` in the command palette and select it.
