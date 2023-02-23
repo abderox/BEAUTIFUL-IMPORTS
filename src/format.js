@@ -25,12 +25,8 @@ function formatImports() {
     let mexports = [];
     let tags = [];
 
-    if (editor) {
-        if (!supportedFileType()) {
-            vscode.window.showErrorMessage(`This file type is not supported ${supportedFileType}`);
-            return;
-        }
-
+    if (!editor) { 
+        return;
     }
 
     if (document.lineCount === 0) {

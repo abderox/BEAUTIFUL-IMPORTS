@@ -2,23 +2,62 @@
 
 ## Unreleased
 
+- Formatting Selected code only to avoid problems.
 - Removes unused imports.
 - Formating imports on save.
 
 ## Release Notes
 
+### [1.0.4] - 2022-02-23
+
+- Fixing some issues about (FileType not supported error).
+- Components with arrributes like `sx= {{...}}` can be formatted.
+- Please keep in mind that the extension formats only inline statements. For example, in this case, it will only handle the first line and may result in the removal of `={{`.
+  
+- _It transforms the line below  :_
+
+```typescript
+    <Button variant="outlined" color="primary" component="label" sx={{
+```
+
+- _Into this which will cause you problems:_
+
+```typescript
+    <Button
+              variant="outlined"
+              color="primary"
+              component="label"
+              sx
+```
+
+- _It is recommended for now to apply it only on statements like_
+
+```typescript
+    <Button variant="outlined" color="primary" component="label" sx={{...}} />
+```
+
+- _which will result in_
+  
+  ```typescript
+      <Button
+                variant="outlined"
+                color="primary"
+                component="label"
+                sx={{...}}
+      />
+  ```
+
 ### [1.0.3] - 2022-02-22
 
 - Now it can formats React Componenets' attributes and props with more or equal to `3`
 - It is recommended to format your document using the widely-known shortcut `Alt+Shift+F` before utilizing this extension `ctrl+Shift+J`.
-
-_It transforms this_
+- _It transforms this_
 
 ```typescript
-< Component disabled className = 'class' value1={val} value2={val2} value3=50 disabled  />
+< Component  className = 'class' value1={val} value2={val2} value3=50 disabled  />
 ```
 
-_To this_
+- _To this_
 
 ```typescript
 <Component
